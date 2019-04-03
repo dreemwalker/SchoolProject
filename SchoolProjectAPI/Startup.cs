@@ -10,7 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using SchoolProjectAPI.Models;
 namespace SchoolProjectAPI
 {
     public class Startup
@@ -25,6 +28,9 @@ namespace SchoolProjectAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string con = "Server=KELPI\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;";
+            services.AddDbContext<SchoolDBContext>(options => options.UseSqlServer(con));
+        
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -33,7 +39,8 @@ namespace SchoolProjectAPI
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage
+                    ();
             }
             else
             {

@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using SchoolProjectAPI.Models;
 namespace SchoolProjectAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        SchoolDBContext db;
+        public ValuesController(SchoolDBContext context)
+        {
+            this.db = context;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IEnumerable<Student> Get()
         {
-            return new string[] { "value1", "value2" };
+            return db.Students.ToList();
+          
         }
 
         // GET api/values/5
