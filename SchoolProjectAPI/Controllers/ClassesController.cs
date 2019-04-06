@@ -23,7 +23,9 @@ namespace SchoolProjectAPI.Controllers
         [HttpGet]
         public IEnumerable<Class> Get()
         {
-            var ClassList = db.Classes.Include(s => s.Students);
+            var ClassList = db.Classes.Include(s => s.Students)
+                .Include(p => p.Perfects)
+                .Include(ct => ct.ClassTeacher).ThenInclude(t => t.TeacherClass);
             return ClassList.ToList();
 
         }

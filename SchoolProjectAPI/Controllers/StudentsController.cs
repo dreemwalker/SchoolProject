@@ -29,27 +29,59 @@ namespace SchoolProjectAPI.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var student = db.Students.Include(c => c.Class).Where(x=>x.Id==id);
+            if (student == null)
+                return NotFound();
+            return new ObjectResult(student);
+           
         }
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]Student student)
         {
+            if (student == null)
+            {
+                return BadRequest();
+            }
+
+            db.Students.Add(student);
+            db.SaveChanges();
+            return Ok(student);
         }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]Student student)
         {
+            if (student == null)
+            {
+                return BadRequest();
+            }
+            if (!db.Students.Any(x => x.Id == student.Id))
+            {
+                return NotFound();
+            }
+
+            db.Update(student);
+            db.SaveChanges();
+            return Ok(student);
         }
 
-        // DELETE api/<controller>/5
+        // DELETE api/students/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            Student student = db.Students.FirstOrDefault(x => x.Id == id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            db.Students.Remove(student);
+            db.SaveChanges();
+            return Ok(student);
         }
     }
 }
