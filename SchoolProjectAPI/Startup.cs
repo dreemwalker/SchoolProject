@@ -31,7 +31,10 @@ namespace SchoolProjectAPI
             string con = "Server=KELPI\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;";
             services.AddDbContext<SchoolDBContext>(options => options.UseSqlServer(con));
         
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+          //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+    .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
