@@ -1,0 +1,32 @@
+﻿@page
+@model SchoolClient.Pages.ClassesModel
+@using SchoolClient.Models
+@{
+}
+<table class="table">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Perfect</td>
+      
+
+
+    </tr>
+    @foreach (Class cl in Model.classes)
+    {
+    <tr>
+        <td>@cl.Id</td>
+        <td>@cl.Name</td>
+
+        @if (@cl.Perfects.Count == 0)
+    {
+        <td>не назначен</td>}
+else
+{
+    <td>@cl.Perfects.FirstOrDefault().Student.Fullname</td>
+}
+
+        <td><a>Teachers List</a></td>
+    </tr>
+    }
+</table>

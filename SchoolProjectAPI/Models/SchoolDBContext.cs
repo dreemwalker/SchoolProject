@@ -15,17 +15,18 @@ namespace SchoolProjectAPI.Models
         {
         }
 
-        public DbSet<ClassTeacher> ClassTeacher { get; set; }
-        public  DbSet<Class> Classes { get; set; }
-        public  DbSet<Perfect> Perfects { get; set; }
-        public  DbSet<Student> Students { get; set; }
-        public  DbSet<Teacher> Teachers { get; set; }
+        public virtual DbSet<ClassTeacher> ClassTeacher { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<Perfect> Perfects { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=KELPI\\SQLEXPRESS;Initial Catalog=SchoolDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=SchoolDB;Trusted_Connection=True;");
             }
         }
 
@@ -39,7 +40,7 @@ namespace SchoolProjectAPI.Models
                     .WithMany(p => p.ClassTeacher)
                     .HasForeignKey(d => d.ClassTeacherId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ClassTeacher_Classes");
+                    .HasConstraintName("FK_ClassTeacher_Classes1");
 
                 entity.HasOne(d => d.TeacherClass)
                     .WithMany(p => p.ClassTeacher)
@@ -59,8 +60,11 @@ namespace SchoolProjectAPI.Models
             modelBuilder.Entity<Perfect>(entity =>
             {
                 entity.HasIndex(e => new { e.ClassId, e.StudentId })
-                    .HasName("IX_Perfects")
+                    .HasName("IX_Perfects_Cl")
                     .IsUnique();
+                entity.HasIndex(e => new { e.StudentId })
+                   .HasName("IX_Perfects_St")
+                   .IsUnique();
 
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.Perfects)
@@ -97,8 +101,6 @@ namespace SchoolProjectAPI.Models
 
             modelBuilder.Entity<Teacher>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Fullname)
                     .HasColumnName("fullname")
                     .HasMaxLength(500)

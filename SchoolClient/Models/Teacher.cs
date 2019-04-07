@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolProjectAPI.Models
+namespace SchoolClient.Models
 {
     public partial class Teacher
     {

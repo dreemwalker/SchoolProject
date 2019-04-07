@@ -3,41 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SchoolProjectAPI.Models;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SchoolProjectAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ClassesController : Controller
+    public class PerfectController : Controller
     {
-
-
-        SchoolDBContext db;
-        public ClassesController(SchoolDBContext context)
-        {
-            this.db = context;
-        }
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<Class> Get()
+        public IEnumerable<string> Get()
         {
-            var ClassList = db.Classes.Include(s => s.Students)
-                .Include(p => p.Perfects)
-                .Include(ct => ct.ClassTeacher).ThenInclude(t => t.TeacherClass);
-            return ClassList.ToList();
-
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public IEnumerable<Class> Get(int id)
+        public string Get(int id)
         {
-            var ClassList = db.Classes.Include(s => s.Students)
-                .Include(p => p.Perfects)
-                .Include(ct => ct.ClassTeacher).ThenInclude(t => t.TeacherClass).Where(x => x.Id == id);
-            return ClassList.ToList();
+            return "value";
         }
 
         // POST api/<controller>

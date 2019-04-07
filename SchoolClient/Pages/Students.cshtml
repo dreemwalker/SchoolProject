@@ -1,0 +1,32 @@
+﻿@page
+@model SchoolClient.Pages.StudentsModel
+@using SchoolClient.Models
+@{
+}
+<table class="table">
+    <tr>
+        <td>ID</td>
+        <td>Student FIO</td>
+        <td>Gender</td>
+        <td>Class</td>
+
+
+    </tr>
+    @foreach (Student student in Model.students)
+    {
+    <tr>
+        <td>@student.Id</td>
+        <td>@student.Fullname</td>
+        <td>@student.Gender</td>
+        @if (@student.Class == null)
+                {
+        <td>не назначен</td>}
+        else
+        {   
+        <td>@student.Class.Name</td> 
+        }
+
+
+    </tr>
+    }
+</table>
