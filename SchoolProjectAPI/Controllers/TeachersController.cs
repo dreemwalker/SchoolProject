@@ -29,7 +29,7 @@ namespace SchoolProjectAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var teacher = db.Teachers;
+            var teacher = db.Teachers.Where(c => c.Id == id) ;
             if (teacher == null)
                 return NotFound();
             return new ObjectResult(teacher);

@@ -69,13 +69,13 @@ namespace SchoolProjectAPI.Models
                 entity.HasOne(d => d.Class)
                     .WithMany(p => p.Perfects)
                     .HasForeignKey(d => d.ClassId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Perfects_Classes");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.Perfects)
                     .HasForeignKey(d => d.StudentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Perfects_Students");
             });
 

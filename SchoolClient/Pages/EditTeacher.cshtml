@@ -1,4 +1,11 @@
 ﻿@page
 @model SchoolClient.Pages.EditTeacherModel
+@using SchoolClient.Models
 @{
 }
+<form method="post">
+    <input type ="number" name="id" value="@Model.teacher.Id" hidden="hidden" />
+    Name <input type="text" name="name" value="@Model.teacher.Fullname"/>
+    Position  <input type="text" name="position"  value="@Model.teacher.Position" />
+    <input type="submit" value="Save" /> <a href="./Teachers">Back</a>
+</form>
