@@ -22,10 +22,9 @@
         <td>@teacher.Position</td>
         <td>
             <a asp-page="./Teachers" onclick="return confirm('Are you sure you want to delete this item?');"
-               asp-page-handler="Delete" asp-route-id="@teacher.Id">Delete</a>
-            <a href="./EditTeacher/@teacher.Id">Edit</a>
+               asp-page-handler="Delete" asp-route-id="@teacher.Id">Delete</a> 
             <a asp-page="./EditTeacher"
-               asp-page-handler="Get" asp-route-id="@teacher.Id">EditT</a>
+               asp-page-handler="Get" asp-route-id="@teacher.Id">Edit</a>
         </td>
 
     </tr>

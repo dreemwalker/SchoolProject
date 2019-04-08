@@ -45,7 +45,7 @@ namespace SchoolClient.Pages
                 
             }
         }
-        public async Task OnPost(int id, string name, string position)
+        public async Task<IActionResult> OnPost(int id, string name, string position)
         {
             Teacher teacher = new Teacher();
             teacher.Id = id;
@@ -60,11 +60,11 @@ namespace SchoolClient.Pages
 
             if (response.IsSuccessStatusCode)
             {
-
+                return RedirectToPage("Teachers");
             }
             else
             {
-
+                return RedirectToPage("Error");
             }
 
         }

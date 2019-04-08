@@ -1,0 +1,47 @@
+﻿@page
+@model SchoolClient.Pages.EditStudentModel
+@using SchoolClient.Models
+@{
+}
+Edit Student
+<form method="post">
+    <div class="form-group">
+        <input type="number" name="id" value="@Model.student.Id" hidden="hidden" />
+        Fullname <input type="text" name="name" value="@Model.student.Fullname" />
+    </div>
+    <div class="form-group">
+        <label>Class</label>
+        <select name="classid">
+                @foreach (Class cl in Model.classes)
+            {
+                if (@cl.Id == Model.student.ClassId)
+                {
+                    <option value="@cl.Id" selected="selected">@cl.Name</option>
+
+            }
+            else
+            {
+                <option value="@cl.Id">@cl.Name</option>
+        }
+    }
+            </select>
+    </div>
+    <div class="form-group">
+        <label> Gender </label>
+        <select name="gender">
+            @if (Model.student.Gender == "male")
+            {
+                <option value="male" selected="selected">Male</option>
+                <option value="female">Female</option>
+            }
+            else
+            {
+                <option value="male">Male</option>
+                <option value="female" selected="selected">Female</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add" /> <a href="./Students">Back</a>
+        </div>
+</form>

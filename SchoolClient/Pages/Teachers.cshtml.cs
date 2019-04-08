@@ -21,7 +21,7 @@ namespace SchoolClient.Pages
             teachers = new List<Teacher>();
 
         }
-        public async Task OnGetDelete(int id)
+        public async Task<IActionResult> OnGetDelete(int id)
         {
 
             /*  var request = new HttpRequestMessage(HttpMethod.Delete,
@@ -36,15 +36,14 @@ namespace SchoolClient.Pages
 
             if (response.IsSuccessStatusCode)
             {
-                /* teachers = await response.Content
-                     .ReadAsAsync<IEnumerable<Teacher>>();*/
-                RedirectToPage("Teachers");
+               
+               return RedirectToPage("Teachers");
             }
             else
             {
-                RedirectToPage("Teachers");
+                return RedirectToPage("Error");
             }
-            //  return RedirectToPage("Teachers");
+           
         }
         public async Task OnGet()
         {

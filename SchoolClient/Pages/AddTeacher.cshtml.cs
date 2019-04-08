@@ -27,7 +27,7 @@ namespace SchoolClient.Pages
         public void OnGet()
         {
         }
-        public async Task OnPost(string name,string position)
+        public async Task<IActionResult> OnPost(string name,string position)
         {
             Teacher teacher = new Teacher();
             teacher.Fullname = name;
@@ -41,11 +41,11 @@ namespace SchoolClient.Pages
 
             if (response.IsSuccessStatusCode)
             {
-               
+                return RedirectToPage("Teachers");
             }
             else
             {
-
+                return RedirectToPage("Error");
             }
 
         }
