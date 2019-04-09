@@ -11,7 +11,7 @@ namespace SchoolClient.Pages
     public class StudentsModel : PageModel
     {
         private readonly IHttpClientFactory _clientFactory;
-
+       
         public IEnumerable<Student> students { get; set; }
         //string message = "";
         public bool GetBranchesError { get; private set; }
@@ -19,7 +19,7 @@ namespace SchoolClient.Pages
         {
             _clientFactory = clientFactory;
             students = new List<Student>();
-            
+           
         }
    
         public async Task<IActionResult> OnGetDelete(int id)

@@ -1,0 +1,50 @@
+﻿@page
+@model SchoolClient.Pages.ClassInfoModel
+@using SchoolClient.Models
+@{
+}
+<div class="panel panel-default">
+    <div class="panel-heading">Class:</div>
+    <div class="panel-body"> @Model.cl.Name</div>
+</div>
+@*<div class="panel panel-default">
+    <div class="panel-heading">
+        Perfect:
+    </div>
+    @if (@Model.cl.Perfects.Count == 0)
+    {
+        <div>не назначен</div>
+    }
+    else
+    {
+        <div>@Model.cl.Perfects.FirstOrDefault().Student.Fullname</div>
+    }
+</div>*@
+    <div>
+        Teachers:
+        <table class="table">
+            
+            @foreach (ClassTeacher teacher in Model.cl.ClassTeacher)
+            {
+                <tr>
+                    <td>@teacher.TeacherClass.Fullname</td>
+
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div>
+        Students:
+        <table class="table">
+
+            @foreach (Student student in Model.cl.Students)
+            {
+            <tr>
+                <td>@student.Fullname</td>
+
+            </tr>
+            }
+        </table>
+    </div>
+
